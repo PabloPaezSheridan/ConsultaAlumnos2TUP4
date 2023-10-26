@@ -20,6 +20,7 @@ namespace ConsultaAlumnoEnClaseTarde.Controllers
         [HttpGet("{idMateria}")]
         public IActionResult GetProfessorxMateria([FromRoute] int idMateria)
         {
+
             return Ok();
         }
 

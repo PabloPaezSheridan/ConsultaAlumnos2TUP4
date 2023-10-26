@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ConsultaAlumnos2TUP4.Data.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConsultaAlumnoEnClaseTarde.Entities
@@ -14,6 +15,6 @@ namespace ConsultaAlumnoEnClaseTarde.Entities
         public string Email { get; set; }
         [Required]
         public string UserName { get; set; }
-        public string UserType { get; set; }
-    }
+        public string UserType { get; set; } = "Student";
+            }
 }

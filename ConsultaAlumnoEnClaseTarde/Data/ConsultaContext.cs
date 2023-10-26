@@ -1,4 +1,5 @@
 ﻿using ConsultaAlumnoEnClaseTarde.Entities;
+using ConsultaAlumnos2TUP4.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsultaAlumnoEnClaseTarde.Data

@@ -1,4 +1,5 @@
 ﻿using ConsultaAlumnoEnClaseTarde.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace ConsultaAlumnoEnClaseTarde.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StudentController : ControllerBase
     {
         private IStudentService _studentService;
@@ -14,6 +16,7 @@ namespace ConsultaAlumnoEnClaseTarde.Controllers
         {
             _studentService = studentService;
         }
+
 
     }
 }
