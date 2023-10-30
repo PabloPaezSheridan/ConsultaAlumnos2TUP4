@@ -1,7 +1,6 @@
 ﻿using ConsultaAlumnoEnClaseTarde.Entities;
 using ConsultaAlumnos2TUP4.Data.Models;
 using ConsultaAlumnos2TUP4.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -24,22 +23,22 @@ namespace ConsultaAlumnos2TUP4.Controllers
         }
 
         [HttpPost]
-        public IActionResult Authenticate([FromBody]CredentialsDto credentialsDto)
+        public IActionResult Authenticate([FromBody] CredentialsDto credentialsDto)
         {
             //valido usuario
-            BaseResponse validarUsuarioResult = _userService.ValidarUsuario(credentialsDto.Username, credentialsDto.Password);
-            if(validarUsuarioResult.Message == "wrong email")
+            BaseResponse validarUsuarioResult = _userService.ValidarUsuario(credentialsDto.Email, credentialsDto.Password);
+            if (validarUsuarioResult.Message == "wrong email")
             {
                 return BadRequest(validarUsuarioResult.Message);
             }
-            else if(validarUsuarioResult.Message == "wrong password")
+            else if (validarUsuarioResult.Message == "wrong password")
             {
                 return Unauthorized();
             }
-            if(validarUsuarioResult.Result)
+            if (validarUsuarioResult.Result)
             {
                 //generacion del token
-                User user = _userService.GetUserByEmail(credentialsDto.Username);
+                User user = _userService.GetUserByEmail(credentialsDto.Email);
                 //Paso 2: Crear el token
                 var securityPassword = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config["Authentication:SecretForKey"])); //Traemos la SecretKey del Json. agregar antes: using Microsoft.IdentityModel.Tokens;
 
@@ -65,6 +64,6 @@ namespace ConsultaAlumnos2TUP4.Controllers
             }
             return BadRequest();
         }
-           
+
     }
 }

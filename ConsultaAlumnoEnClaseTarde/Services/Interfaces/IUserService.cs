@@ -7,5 +7,6 @@ namespace ConsultaAlumnos2TUP4.Services.Interfaces
     {
         public BaseResponse ValidarUsuario(string username, string password);
         public User? GetUserByEmail(string username);
+        public int CreateUser(User user);
     }
 }

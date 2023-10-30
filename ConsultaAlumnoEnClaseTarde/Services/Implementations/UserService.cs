@@ -16,16 +16,16 @@ namespace ConsultaAlumnos2TUP4.Services.Implementations
 
         public User? GetUserByEmail(string email)
         {
-            return _context.Users.SingleOrDefault(u=>u.Email == email);
+            return _context.Users.SingleOrDefault(u => u.Email == email);
         }
 
-        public BaseResponse  ValidarUsuario(string email, string password)
+        public BaseResponse ValidarUsuario(string email, string password)
         {
             BaseResponse response = new BaseResponse();
             User? userForLogin = _context.Users.SingleOrDefault(u => u.Email == email);
             if (userForLogin != null)
             {
-                if(userForLogin.Password==password)
+                if (userForLogin.Password == password)
                 {
                     response.Result = true;
                     response.Message = "loging Succesfull";
@@ -38,10 +38,17 @@ namespace ConsultaAlumnos2TUP4.Services.Implementations
             }
             else
             {
-                response.Result=false;
+                response.Result = false;
                 response.Message = "wrong email";
             }
             return response;
+        }
+
+        public int CreateUser(User user)
+        {
+            _context.Add(user);
+            _context.SaveChanges();
+            return user.Id;
         }
     }
 }
