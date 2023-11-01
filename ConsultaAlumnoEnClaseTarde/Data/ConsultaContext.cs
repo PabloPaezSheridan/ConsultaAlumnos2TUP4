@@ -81,7 +81,7 @@ namespace ConsultaAlumnoEnClaseTarde.Data
                 .HasMany(su => su.Professors)
                 .WithMany(p => p.Subjects)
                 .UsingEntity(j => j
-                    .ToTable("nm  ")
+                    .ToTable("ProfessorSubject")
                     .HasData(new[]
                         {
                             new { ProfessorsId = 4, SubjectsId = 1},

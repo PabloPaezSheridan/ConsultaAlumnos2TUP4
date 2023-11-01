@@ -14,6 +14,7 @@ namespace ConsultaAlumnoEnClaseTarde.Entities
         public string Email { get; set; }
         [Required]
         public string UserName { get; set; }
-        public string UserType { get; set; } = "Student";
+        public string UserType { get; set; }
+        public bool State { get; set; } = true;
     }
 }

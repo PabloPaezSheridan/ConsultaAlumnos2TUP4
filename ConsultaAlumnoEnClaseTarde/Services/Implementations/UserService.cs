@@ -50,5 +50,20 @@ namespace ConsultaAlumnos2TUP4.Services.Implementations
             _context.SaveChanges();
             return user.Id;
         }
+
+        public void UpdateUser(User user)
+        {
+            _context.Update(user);
+            _context.SaveChanges();
+        }
+
+        public void DeleteUser(int userId)
+        {
+            User userToBeDeleted = _context.Users.FirstOrDefault(u => u.Id == userId);
+            userToBeDeleted.State = false;
+            _context.Update(userToBeDeleted);
+            _context.SaveChanges();
+        }
+
     }
 }

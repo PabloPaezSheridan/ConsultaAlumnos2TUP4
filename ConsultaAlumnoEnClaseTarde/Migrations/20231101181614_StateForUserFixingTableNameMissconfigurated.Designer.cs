@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ConsultaAlumnoEnClaseTarde.Migrations
+namespace ConsultaAlumnos2TUP4.Migrations
 {
     [DbContext(typeof(ConsultaContext))]
-    [Migration("20231011182302_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20231101181614_StateForUserFixingTableNameMissconfigurated")]
+    partial class StateForUserFixingTableNameMissconfigurated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,7 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Quarter")
+                    b.Property<string>("Room")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -114,7 +114,7 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                         {
                             Id = 1,
                             Name = "Programacion 3",
-                            Quarter = "103"
+                            Room = "103"
                         });
                 });
 
@@ -139,6 +139,9 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("State")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -169,7 +172,7 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
 
                     b.HasIndex("SubjectsId");
 
-                    b.ToTable("ProfessorsSubjects", (string)null);
+                    b.ToTable("ProfessorSubject", (string)null);
 
                     b.HasData(
                         new
@@ -225,7 +228,9 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                             LastName = "Bologna",
                             Name = "Nicolas",
                             Password = "123456",
-                            UserName = "nbologna_profesor"
+                            State = true,
+                            UserName = "nbologna_profesor",
+                            UserType = "Student"
                         },
                         new
                         {
@@ -234,7 +239,9 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                             LastName = "Paez",
                             Name = "Pablo",
                             Password = "123456",
-                            UserName = "ppaez"
+                            State = true,
+                            UserName = "ppaez",
+                            UserType = "Student"
                         });
                 });
 
@@ -252,7 +259,9 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                             LastName = "Bologna",
                             Name = "Nicolas",
                             Password = "123456",
-                            UserName = "nbologna_alumno"
+                            State = true,
+                            UserName = "nbologna_alumno",
+                            UserType = "Student"
                         },
                         new
                         {
@@ -261,7 +270,9 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                             LastName = "Perez",
                             Name = "Juan",
                             Password = "123456",
-                            UserName = "jperez"
+                            State = true,
+                            UserName = "jperez",
+                            UserType = "Student"
                         },
                         new
                         {
@@ -270,7 +281,9 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                             LastName = "Garcia",
                             Name = "Pedro",
                             Password = "123456",
-                            UserName = "pgarcia"
+                            State = true,
+                            UserName = "pgarcia",
+                            UserType = "Student"
                         });
                 });
 

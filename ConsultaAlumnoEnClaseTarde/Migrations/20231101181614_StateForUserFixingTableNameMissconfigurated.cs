@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace ConsultaAlumnoEnClaseTarde.Migrations
+namespace ConsultaAlumnos2TUP4.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class StateForUserFixingTableNameMissconfigurated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Quarter = table.Column<string>(type: "TEXT", nullable: false)
+                    Room = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +38,8 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                     Password = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", nullable: false),
-                    UserType = table.Column<string>(type: "TEXT", nullable: false)
+                    UserType = table.Column<string>(type: "TEXT", nullable: false),
+                    State = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,7 +47,7 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProfessorsSubjects",
+                name: "ProfessorSubject",
                 columns: table => new
                 {
                     ProfessorsId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -54,15 +55,15 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProfessorsSubjects", x => new { x.ProfessorsId, x.SubjectsId });
+                    table.PrimaryKey("PK_ProfessorSubject", x => new { x.ProfessorsId, x.SubjectsId });
                     table.ForeignKey(
-                        name: "FK_ProfessorsSubjects_Subjects_SubjectsId",
+                        name: "FK_ProfessorSubject_Subjects_SubjectsId",
                         column: x => x.SubjectsId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProfessorsSubjects_Users_ProfessorsId",
+                        name: "FK_ProfessorSubject_Users_ProfessorsId",
                         column: x => x.ProfessorsId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -161,23 +162,23 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
 
             migrationBuilder.InsertData(
                 table: "Subjects",
-                columns: new[] { "Id", "Name", "Quarter" },
+                columns: new[] { "Id", "Name", "Room" },
                 values: new object[] { 1, "Programacion 3", "103" });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "LastName", "Name", "Password", "UserName", "UserType" },
+                columns: new[] { "Id", "Email", "LastName", "Name", "Password", "State", "UserName", "UserType" },
                 values: new object[,]
                 {
-                    { 1, "nbologna31@gmail.com", "Bologna", "Nicolas", "123456", "nbologna_alumno", "Student" },
-                    { 2, "Jperez@gmail.com", "Perez", "Juan", "123456", "jperez", "Student" },
-                    { 3, "pgarcia@gmail.com", "Garcia", "Pedro", "123456", "pgarcia", "Student" },
-                    { 4, "nbologna31@gmail.com", "Bologna", "Nicolas", "123456", "nbologna_profesor", "Professor" },
-                    { 5, "ppaez@gmail.com", "Paez", "Pablo", "123456", "ppaez", "Professor" }
+                    { 1, "nbologna31@gmail.com", "Bologna", "Nicolas", "123456", true, "nbologna_alumno", "Student" },
+                    { 2, "Jperez@gmail.com", "Perez", "Juan", "123456", true, "jperez", "Student" },
+                    { 3, "pgarcia@gmail.com", "Garcia", "Pedro", "123456", true, "pgarcia", "Student" },
+                    { 4, "nbologna31@gmail.com", "Bologna", "Nicolas", "123456", true, "nbologna_profesor", "Student" },
+                    { 5, "ppaez@gmail.com", "Paez", "Pablo", "123456", true, "ppaez", "Student" }
                 });
 
             migrationBuilder.InsertData(
-                table: "ProfessorsSubjects",
+                table: "ProfessorSubject",
                 columns: new[] { "ProfessorsId", "SubjectsId" },
                 values: new object[,]
                 {
@@ -195,8 +196,8 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProfessorsSubjects_SubjectsId",
-                table: "ProfessorsSubjects",
+                name: "IX_ProfessorSubject_SubjectsId",
+                table: "ProfessorSubject",
                 column: "SubjectsId");
 
             migrationBuilder.CreateIndex(
@@ -234,7 +235,7 @@ namespace ConsultaAlumnoEnClaseTarde.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProfessorsSubjects");
+                name: "ProfessorSubject");
 
             migrationBuilder.DropTable(
                 name: "Responses");
