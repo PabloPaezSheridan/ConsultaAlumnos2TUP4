@@ -3,6 +3,7 @@ using System;
 using ConsultaAlumnoEnClaseTarde.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsultaAlumnos2TUP4.Migrations
 {
     [DbContext(typeof(ConsultaContext))]
-    partial class ConsultaContextModelSnapshot : ModelSnapshot
+    [Migration("20231108172118_ResponeQuestionsRelationship")]
+    partial class ResponeQuestionsRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");

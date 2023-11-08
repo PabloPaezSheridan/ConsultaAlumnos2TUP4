@@ -101,6 +101,26 @@ namespace ConsultaAlumnoEnClaseTarde.Data
                        }
                    ));
 
+            modelBuilder.Entity<Question>()
+            .HasMany(q => q.Responses)
+            .WithOne(r => r.Question)
+            .HasForeignKey(r => r.QuestionId);
+
+            modelBuilder.Entity<Question>()
+                .HasOne(q => q.Student)
+                .WithMany(s => s.Questions)
+                .HasForeignKey(q => q.CreatorStudentId);
+
+            modelBuilder.Entity<Question>()
+                .HasOne(q => q.AssignedProfessor)
+                .WithMany(p => p.Questions)
+                .HasForeignKey(q => q.ProfessorId);
+
+            modelBuilder.Entity<Response>()
+                .HasOne(r => r.Creator)
+                .WithMany()
+                .HasForeignKey(r => r.CreatorId);
         }
+
     }
 }
